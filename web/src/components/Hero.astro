@@ -1,0 +1,207 @@
+---
+import { homeContent, type Locale } from "../lib/siteContent";
+import { Image, getImage } from "astro:assets";
+
+import analysisHero from "../assets/analysis.jpg";
+import machineLearning from "../assets/machine-learning.jpg";
+import deepLearning from "../assets/deep-learning.jpg";
+
+const locale: Locale = Astro.url.pathname.startsWith("/en") ? "en" : "es";
+const content = homeContent[locale];
+const hero = content.heroSlider;
+const servicesHref = locale === "en" ? "/en/services" : "/services";
+
+const heroImages = {
+  "analysis-hero": analysisHero,
+  "machineLearning-hero": machineLearning,
+  "deepLearning-hero": deepLearning,
+} as const;
+
+type HeroImageKey = keyof typeof heroImages;
+
+const slides = await Promise.all(
+  hero.slides.map(async (slide) => {
+    const imageKey = slide.imageKey as HeroImageKey;
+    const imageAsset = heroImages[imageKey];
+
+    const optimizedImage = await getImage({
+      src: imageAsset,
+      width: 900,
+      height: 900,
+      format: "webp",
+      quality: 75,
+    });
+
+    return {
+      ...slide,
+      imageAsset,
+      imageSrc: optimizedImage.src,
+    };
+  })
+);
+
+const initialSlide = slides[0];
+---
+
+<section class="relative overflow-hidden bg-[#0B2C4A] px-4 pb-10 pt-28 md:px-6 md:pb-16 md:pt-32">
+  <div class="absolute inset-0 opacity-70" aria-hidden="true">
+    <div class="h-full w-full bg-[linear-gradient(rgba(7,23,41,0.08)_1px,transparent_1px),linear-gradient(90deg,rgba(7,23,41,0.08)_1px,transparent_1px)] bg-[size:72px_72px]"></div>
+  </div>
+
+  <div class="relative mx-auto max-w-7xl">
+    <div class="grid min-h-[calc(100vh-10rem)] gap-8 lg:grid-cols-[1.08fr_0.92fr] lg:items-stretch">
+      <div class="flex flex-col justify-between py-6 md:py-10 lg:py-12">
+        <div>
+          <p id="service-description" class="mb-8 max-w-sm text-lg leading-7 text-white/72 transition-opacity duration-300">
+            {initialSlide.description}
+          </p>
+
+          <h1 id="service-title" class="max-w-4xl text-[clamp(2.2rem,5.2vw,4.4rem)] font-medium leading-[1] tracking-[-0.04em] text-white transition-opacity duration-500">
+            {initialSlide.title}
+          </h1>
+        </div>
+
+        <div class="mt-12 max-w-xl">
+          <div class="flex items-center justify-between gap-4 text-xs font-medium uppercase tracking-[0.22em] text-white/55">
+            <span id="service-label" class="transition-opacity duration-500">{initialSlide.label}</span>
+
+            <div class="flex items-center gap-2">
+              <button id="service-prev" type="button" aria-label={hero.prevLabel} class="grid h-9 w-9 place-items-center rounded-full border border-white/16 bg-white/8 text-white transition hover:bg-white/14">
+                <span aria-hidden="true">←</span>
+              </button>
+              <button id="service-next" type="button" aria-label={hero.nextLabel} class="grid h-9 w-9 place-items-center rounded-full border border-white/16 bg-white/8 text-white transition hover:bg-white/14">
+                <span aria-hidden="true">→</span>
+              </button>
+            </div>
+          </div>
+
+          <div class="mt-4 h-1.5 overflow-hidden rounded-full bg-white/14">
+            <div id="service-progress" class="h-full w-0 rounded-full bg-white"></div>
+          </div>
+        </div>
+      </div>
+
+      <div class="relative min-h-[560px] overflow-hidden rounded-[1rem]">
+        <Image
+            id="service-image"
+            src={initialSlide.imageAsset}
+            alt={initialSlide.alt}
+            width={900}
+            height={900}
+            format="webp"
+            quality={75}
+            class="absolute inset-0 h-full w-full object-cover transition-opacity duration-300"
+            loading="eager"
+            decoding="async"
+        />
+        <div class="absolute inset-0 bg-gradient-to-t from-[#071729]/72 via-[#071729]/10 to-transparent"></div>
+        <a href={servicesHref} class="absolute bottom-6 left-6 inline-flex items-center gap-3 rounded-full bg-white px-5 py-3 text-sm font-medium text-[#071729] transition hover:bg-[#dcecff]">
+          {hero.cta}
+          <span aria-hidden="true">→</span>
+        </a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<script define:vars={{ slides }}>
+  // @ts-nocheck
+  (function () {
+    let idx = 0;
+    const title = document.getElementById("service-title");
+    const description = document.getElementById("service-description");
+    const label = document.getElementById("service-label");
+    const prevButton = document.getElementById("service-prev");
+    const nextButton = document.getElementById("service-next");
+    const progress = document.getElementById("service-progress");
+    const image = document.getElementById("service-image");
+    const fillDuration = 3000;
+    const fadeDuration = 350;
+    let fillTimeoutId = undefined;
+    let fadeTimeoutId = undefined;
+    let cycleToken = 0;
+
+    function clearTimers() {
+      if (fillTimeoutId !== undefined) window.clearTimeout(fillTimeoutId);
+      if (fadeTimeoutId !== undefined) window.clearTimeout(fadeTimeoutId);
+      fillTimeoutId = undefined;
+      fadeTimeoutId = undefined;
+    }
+
+    function renderSlide(slide) {
+      title.textContent = slide.title;
+      description.textContent = slide.description;
+      label.textContent = slide.label;
+      image.setAttribute("src", slide.imageSrc);
+      image.setAttribute("alt", slide.alt);
+      title.style.opacity = "1";
+      description.style.opacity = "1";
+      label.style.opacity = "1";
+      image.style.opacity = "1";
+    }
+
+    function startCycle(index) {
+      if (!title || !description || !label || !progress || !image) return;
+
+      clearTimers();
+      cycleToken += 1;
+      const token = cycleToken;
+      idx = index;
+
+      renderSlide(slides[idx]);
+
+      progress.style.transition = "none";
+      progress.style.width = "0%";
+      progress.offsetWidth;
+
+      requestAnimationFrame(() => {
+        if (token !== cycleToken) return;
+        progress.style.transition = `width ${fillDuration}ms linear`;
+        progress.style.width = "100%";
+      });
+
+      fillTimeoutId = window.setTimeout(() => {
+        if (token !== cycleToken) return;
+
+        title.style.opacity = "0";
+        description.style.opacity = "0";
+        label.style.opacity = "0";
+        image.style.opacity = "0";
+
+        fadeTimeoutId = window.setTimeout(() => {
+          if (token !== cycleToken) return;
+          idx = (idx + 1) % slides.length;
+          startCycle(idx);
+        }, fadeDuration);
+      }, fillDuration);
+    }
+
+    function goPrevious() {
+      idx = (idx - 1 + slides.length) % slides.length;
+      startCycle(idx);
+    }
+
+    function goNext() {
+      idx = (idx + 1) % slides.length;
+      startCycle(idx);
+    }
+
+    const start = () => {
+        prevButton?.addEventListener("click", goPrevious);
+        nextButton?.addEventListener("click", goNext);
+
+        slides.forEach((slide) => {
+            const img = new window.Image();
+            img.src = slide.imageSrc;
+        });
+
+        startCycle(idx);
+    };
+
+    if (document.readyState === "loading") {
+      document.addEventListener("DOMContentLoaded", start, { once: true });
+    } else {
+      start();
+    }
+  })();
+</script>

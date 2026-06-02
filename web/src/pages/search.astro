@@ -1,0 +1,40 @@
+---
+import BaseLayout from "../layouts/Layout.astro";
+import { searchPageContent, type Locale } from "../lib/siteContent";
+
+const locale: Locale = Astro.url.pathname.startsWith("/en") ? "en" : "es";
+const content = searchPageContent[locale];
+const query = Astro.url.searchParams.get("q") ?? "";
+const homeHref = locale === "en" ? "/en" : "/";
+---
+
+<BaseLayout title={content.title} description={content.description}>
+  <main class="bg-[#eef4fb] pt-24">
+    <section class="px-4 pb-24 pt-14 md:px-6 md:pb-28 md:pt-20">
+      <div class="mx-auto max-w-7xl">
+        <div class="border-t border-[#0B2C4A]/12 pt-10">
+          <p class="mb-6 text-[0.78rem] font-semibold uppercase tracking-[0.24em] text-[#00B2EB]">
+            {content.eyebrow}
+          </p>
+
+          <h1 class="max-w-5xl text-[clamp(2rem,4vw,3rem)] font-medium leading-[1] tracking-[-0.04em] text-[#0B2C4A]">
+            {content.emptyTitle}
+          </h1>
+
+          {query && (
+            <p class="mt-6 max-w-2xl text-[1.05rem] leading-8 text-[#0B2C4A]/68">
+              {content.emptyText} “{query}”.
+            </p>
+          )}
+
+          <a
+            href={homeHref}
+            class="mt-10 inline-flex rounded-full bg-[#0B2C4A] px-6 py-3 text-sm font-medium text-white transition hover:bg-[#00B2EB] hover:text-[#0B2C4A]"
+          >
+            {content.homeLabel}
+          </a>
+        </div>
+      </div>
+    </section>
+  </main>
+</BaseLayout>

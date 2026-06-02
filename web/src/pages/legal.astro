@@ -1,0 +1,76 @@
+---
+import { legalPageContent, type Locale } from "../lib/siteContent";
+import BaseLayout from "../layouts/Layout.astro";
+const locale: Locale = Astro.url.pathname.startsWith("/en") ? "en" : "es";
+const content = legalPageContent[locale];
+---
+
+<BaseLayout title={content.title} description={content.description}> 
+  <section class="px-6 pb-16 pt-32 md:px-10 lg:px-16">
+    <div class="mx-auto max-w-6xl">
+      <h1 class="max-w-4xl text-[clamp(2.1rem,5vw,3.8rem)] font-medium leading-[1] tracking-[-0.04em] text-[#0B2C4A]">
+        {content.heading}
+      </h1>
+
+      <p class="mt-6 text-sm uppercase tracking-[0.2em] text-neutral-500">
+        {content.effectiveDate}
+      </p>
+
+      <p class="mt-8 max-w-3xl text-[1rem] leading-8 text-neutral-600 md:text-[1.05rem]">
+        {content.intro}
+      </p>
+    </div>
+  </section>
+
+  <section class="border-t border-neutral-200 px-6 py-16 md:px-10 lg:px-16">
+    <div class="mx-auto grid max-w-6xl gap-12 lg:grid-cols-[280px_1fr]">
+      <aside class="lg:sticky lg:top-28 lg:self-start">
+        <p class="mb-5 text-sm uppercase tracking-[0.25em] text-neutral-500">
+          {content.onThisPage}
+        </p>
+
+        <nav class="flex flex-col gap-3">
+          {content.sections.map((section) => (
+            <a href={`#${section.id}`} class="text-sm text-neutral-600 transition hover:text-neutral-950">
+              {section.title}
+            </a>
+          ))}
+        </nav>
+      </aside>
+
+      <div class="space-y-20">
+        {content.sections.map((section) => (
+          <section id={section.id} class="scroll-mt-28">
+            <h2 class="border-b border-neutral-200 pb-6 text-[clamp(1.6rem,3vw,2.6rem)] font-medium leading-[1.05] tracking-[-0.035em] text-[#0B2C4A]">
+              {section.title}
+            </h2>
+
+            <div class="mt-10 space-y-10">
+              {section.blocks.map((block) => (
+                <div>
+                  <h3 class="text-[1.15rem] font-medium leading-[1.3] tracking-[-0.02em] text-[#0B2C4A]">
+                    {block.heading}
+                  </h3>
+
+                  <div class="mt-4 space-y-4 text-base leading-8 text-neutral-600">
+                    {block.paragraphs.map((paragraph) => (
+                      <p>{paragraph}</p>
+                    ))}
+
+                    {"bullets" in block && block.bullets?.length && (
+                      <ul class="list-disc space-y-2 pl-5">
+                        {block.bullets.map((bullet) => (
+                          <li>{bullet}</li>
+                        ))}
+                      </ul>
+                    )}
+                  </div>
+                </div>
+              ))}
+            </div>
+          </section>
+        ))}
+      </div>
+    </div>
+  </section>
+</BaseLayout>

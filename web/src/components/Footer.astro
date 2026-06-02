@@ -1,0 +1,47 @@
+---
+import { Image } from 'astro:assets';
+import logoVidraBlanco from '../assets/Logo_vidra_sinfondo_letrablanca.png';
+import { localeLinks, footerCopy } from '../lib/siteContent';
+const currentYear = new Date().getFullYear();
+const { locale = 'es' } = Astro.props;
+const localeKey: keyof typeof localeLinks = locale === 'en' ? 'en' : 'es';
+const links = localeLinks[localeKey].footer;
+const copy = footerCopy[localeKey];
+const homeHref = localeKey === 'en' ? '/en' : '/';
+---
+
+<footer class="bg-[#0B2C4A] px-4 pb-6 pt-20 text-white md:px-6 md:pt-28">
+  <div class="mx-auto max-w-7xl">
+    <div class="grid gap-12 border-t border-white/15 pt-8 md:grid-cols-[1fr_auto] md:items-start">
+      <a href={homeHref} class="inline-flex items-center" aria-label="Vidra home">
+        <Image
+          src={logoVidraBlanco}
+          alt="Vidra"
+          class="h-[60px] w-auto object-contain"
+          loading="eager"
+          decoding="async"
+        />
+      </a>
+
+      <nav class="grid gap-3 text-sm font-medium text-white/60 md:text-right">
+        {links.map((link: { label: string; href: string }) => (
+          <a href={link.href} class="transition hover:text-white">
+            {link.label}
+          </a>
+        ))}
+      </nav>
+    </div>
+
+    <div class="mt-20 md:mt-28">
+        <h2 class="text-[clamp(4rem,18vw,16rem)] font-medium leading-[0.78] tracking-[-0.08em] text-white">
+        <span class="text-[#00B2EB]">V</span><span>IDRA</span>
+        </h2>
+    </div>
+
+    <div class="mt-8 flex flex-col gap-3 border-t border-white/15 pt-5 text-xs text-white/45 md:flex-row md:items-center md:justify-between">
+      <p>{copy.yearLabel.replace('{year}', String(currentYear))}</p>
+      <p>{copy.tagline}</p>
+      <a href="/legal" class="transition hover:text-white">{copy.legal}</a>
+    </div>
+  </div>
+</footer>

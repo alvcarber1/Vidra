@@ -1,0 +1,115 @@
+---
+import { Image, getImage } from "astro:assets";
+import analysisImage from "../../assets/analysis.jpg";
+import machineLearningImage from "../../assets/machine-learning.jpg";
+import deepLearningImage from "../../assets/deep-learning.jpg";
+import BaseLayout from "../../layouts/Layout.astro";
+import { serviceContent, type Locale } from "../../lib/siteContent";
+
+const locale: Locale = Astro.url.pathname.startsWith("/en") ? "en" : "es";
+const content = serviceContent[locale];
+const services = content.services;
+const serviceBase = locale === "en" ? "/en/services" : "/services";
+const serviceImages = {
+  analysis: analysisImage,
+  machineLearning: machineLearningImage,
+  deepLearning: deepLearningImage,
+} as const;
+
+const optimizedServices = await Promise.all(
+  services.map(async (service) => {
+    const imageKey = service.imageKey as ServiceImageKey;
+    const imageAsset = serviceImages[imageKey];
+
+    const optimizedImage = await getImage({
+      src: imageAsset,
+      width: 520,
+      height: 390,
+      format: "webp",
+      quality: 65,
+    });
+
+    return {
+      ...service,
+      imageSrc: optimizedImage.src,
+    };
+  })
+);
+
+type ServiceImageKey = keyof typeof serviceImages;
+---
+
+<BaseLayout title={`${content.index.eyebrow} | Vidra`} description={content.index.description}>
+  <main class="bg-[#eef4fb] pt-24">
+    <section class="px-4 py-12 md:px-6 md:py-16">
+      <div class="mx-auto max-w-7xl">
+        <a href={locale === "en" ? "/en/#what-we-do" : "/#what-we-do"} class="mb-10 inline-flex text-sm font-medium text-[#0B2C4A]/70 hover:text-[#0B2C4A]">
+          {content.index.backLabel}
+        </a>
+
+        <div class="border-t border-[#0B2C4A]/15 pt-10">
+          <p class="mb-6 text-[0.78rem] font-semibold uppercase tracking-[0.22em] text-[#00B2EB]">
+            {content.index.eyebrow}
+          </p>
+
+          <h1 class="max-w-3xl text-[clamp(2.1rem,5vw,3.8rem)] font-medium leading-[1] tracking-[-0.04em] text-[#0B2C4A]">
+            {content.index.title}
+          </h1>
+
+          <p class="mt-6 max-w-2xl text-[1.05rem] leading-8 text-[#0B2C4A]/70">
+            {content.index.description}
+          </p>
+
+          <div class="mt-16 grid gap-5 md:grid-cols-3">
+            {optimizedServices.map((service) => (
+              <a
+                href={`${serviceBase}/${service.slug}`}
+                class="group flex min-h-[520px] flex-col overflow-hidden rounded-[1.5rem] border border-[#0B2C4A]/10 bg-white shadow-[0_20px_60px_rgba(11,44,74,0.08)] transition duration-500 hover:-translate-y-2 hover:border-transparent hover:bg-[#0B2C4A]"
+              >
+                <Image
+                  src={service.imageSrc}
+                  alt={`Servicio de ${service.title} - Vidra`}
+                  width={640}
+                  height={480}
+                  format="webp"
+                  quality={72}
+                  class="aspect-[4/3] w-full object-cover transition duration-700 group-hover:scale-105"
+                  loading="lazy"
+                  decoding="async"
+                />
+
+                <div class="flex flex-1 flex-col justify-between p-7">
+                  <div>
+                    <p class="text-xs font-semibold uppercase tracking-[0.22em] text-[#00B2EB] transition group-hover:text-white/55">
+                      {service.eyebrow}
+                    </p>
+
+                    <h2 class="mt-6 text-[clamp(1.45rem,2.2vw,1.8rem)] font-medium leading-[1.05] tracking-[-0.035em] text-[#0B2C4A] transition group-hover:text-white">
+                      {service.title}
+                    </h2>
+
+                    <p class="mt-5 text-[1rem] leading-7 text-[#0B2C4A]/65 transition group-hover:text-white/70">
+                      {service.description}
+                    </p>
+
+                    <div class="mt-8 space-y-3 border-t border-[#0B2C4A]/10 pt-6 transition group-hover:border-white/10">
+                      {service.points.map((point) => (
+                        <p class="text-sm font-medium text-[#0B2C4A]/70 transition group-hover:text-white/70">
+                          {point}
+                        </p>
+                      ))}
+                    </div>
+                  </div>
+
+                  <span class="mt-10 grid h-12 w-12 place-items-center rounded-full bg-[#0B2C4A] text-white transition duration-500 group-hover:bg-[#00B2EB] group-hover:text-[#0B2C4A]">
+                    →
+                  </span>
+                </div>
+              </a>
+            ))}
+          </div>
+        </div>
+      </div>
+    </section>
+  </main>
+</BaseLayout>

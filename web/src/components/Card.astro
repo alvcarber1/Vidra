@@ -1,0 +1,17 @@
+---
+const { title, description } = Astro.props;
+import { homeContent, processContent, type Locale } from "../lib/siteContent";
+
+const locale: Locale = Astro.url.pathname.startsWith("/es") ? "es" : "en";
+
+const content = homeContent[locale];
+const process = processContent[locale];
+---
+
+<div class="p-8 border-r border-b border-white/10 hover:bg-white/[0.02] transition-colors group">
+  <h3 class="text-xl font-light mb-4 text-white group-hover:text-gray-300 transition-colors">{title}</h3>
+  <p class="text-sm text-gray-400 font-light leading-relaxed">{description}</p>
+  <div class="mt-8 flex justify-end">
+    <span class="text-xs tracking-widest uppercase opacity-0 group-hover:opacity-100 transition-opacity text-white">Saber más ➔</span>
+  </div>
+</div>
