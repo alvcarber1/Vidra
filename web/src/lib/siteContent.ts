@@ -9,6 +9,7 @@ export const localeLinks = {
       { label: "Procesos", href: "/#process" },
       { label: "Quiénes somos", href: "/#who-we-are" },
       { label: "Contacto", href: "/#contact" },
+      { label: "Blog", href: "/blog" },
     ],
     footer: [
       { label: "Qué hacemos", href: "/#what-we-do" },
@@ -37,8 +38,8 @@ export const localeLinks = {
 
 export const homeContent = {
   es: {
-    title: "Vidra",
-    description: "Vidra diseña consultoría en IA para estrategia, entrega y resultados medibles.",
+    title: "Vidra | Consultoría de IA y Estrategia de Datos para Empresas",
+    description: "Expertos en soluciones de IA: Auditoría de datos, modelos predictivos y Deep Learning. Transformamos información compleja en resultados de negocio medibles.",
     hero: {
       description: "Convertimos la información de negocio en sistemas de IA listos para operar y fáciles de adoptar.",
       ctaLabel: "Explorar servicios",
@@ -124,8 +125,8 @@ export const homeContent = {
     },
   },
   en: {
-    title: "Vidra",
-    description: "Vidra delivers AI consulting for strategy, delivery, and measurable business impact.",
+    title: "Vidra | AI Consulting & Data Strategy for Enterprise",
+    description: "Professional AI solutions: Data auditing, predictive modeling, and Deep Learning. We turn complex business information into measurable impact and ROI.",
     hero: {
       description: "We turn raw business information into operational AI systems that are ready to use and easy to adopt.",
       ctaLabel: "Explore services",
@@ -240,12 +241,15 @@ export const serviceContent = {
     index: {
       eyebrow: "Servicios de consultoría",
       title: "Servicios de IA diseñados para pasar del análisis a la ejecución.",
+      metaTitle: "Servicios de Consultoría en IA | Vidra",
       description: "Cada servicio está estructurado para reducir incertidumbre, definir un alcance claro y entregar un resultado práctico que el equipo pueda adoptar.",
       backLabel: "← Volver al resumen",
     },
     services: [
       {
         title: "Análisis",
+        metaTitle: "Análisis de Datos y Auditoría de IA | Vidra",
+        metaDescription: "Evaluamos tus datos y prioridades de negocio para identificar oportunidades de IA con retorno de inversión real.",
         slug: "analysis",
         eyebrow: "Servicio 01",
         imageKey: "analysis",
@@ -254,6 +258,8 @@ export const serviceContent = {
       },
       {
         title: "Machine Learning",
+        metaTitle: "Modelos de Machine Learning Predictivo | Vidra",
+        metaDescription: "Desarrollo de sistemas predictivos personalizados para previsión de demanda, riesgos y automatización inteligente.",
         slug: "machine-learning",
         eyebrow: "Servicio 02",
         imageKey: "machineLearning",
@@ -262,6 +268,8 @@ export const serviceContent = {
       },
       {
         title: "Deep Learning",
+        metaTitle: "Soluciones de Deep Learning y Redes Neuronales | Vidra",
+        metaDescription: "IA avanzada para procesamiento de lenguaje natural (NLP), visión por computador y datos no estructurados.",
         slug: "deep-learning",
         eyebrow: "Servicio 03",
         imageKey: "deepLearning",
@@ -339,12 +347,15 @@ export const serviceContent = {
     index: {
       eyebrow: "Consulting services",
       title: "AI services designed to move from assessment to execution.",
+      metaTitle: "AI Consulting Services | Vidra",
       description: "Each service is structured to reduce uncertainty, define a clear scope, and deliver a practical outcome that the team can adopt.",
       backLabel: "← Back to overview",
     },
     services: [
       {
         title: "Analysis",
+        metaTitle: "Data Analysis & AI Readiness Assessment | Vidra",
+        metaDescription: "We assess your data landscape and business priorities to identify AI opportunities with clear operational value.",
         slug: "analysis",
         eyebrow: "Service 01",
         imageKey: "analysis",
@@ -353,6 +364,8 @@ export const serviceContent = {
       },
       {
         title: "Machine Learning",
+        metaTitle: "Predictive Machine Learning Solutions | Vidra",
+        metaDescription: "Tailored predictive systems to anticipate risks, forecast demand, and support data-driven decision making.",
         slug: "machine-learning",
         eyebrow: "Service 02",
         imageKey: "machineLearning",
@@ -361,6 +374,8 @@ export const serviceContent = {
       },
       {
         title: "Deep Learning",
+        metaTitle: "Advanced Deep Learning & Neural Networks | Vidra",
+        metaDescription: "Custom AI for NLP, computer vision, and large-scale unstructured data challenges.",
         slug: "deep-learning",
         eyebrow: "Service 03",
         imageKey: "deepLearning",
@@ -438,10 +453,10 @@ export const serviceContent = {
 
 export const whoWeArePageContent = {
   es: {
-    title: "Quiénes somos | Vidra",
-    description: "Conoce el enfoque, el equipo y los principios que hacen diferente a Vidra.",
+    title: "Sobre Vidra | Especialistas en Implementación de IA Aplicada",
+    description: "Conoce a nuestro equipo multidisciplinario. Combinamos ciencia de datos e ingeniería de software para entregar soluciones de IA escalables y transparentes.",
     hero: {
-      eyebrow: "Quiénes somos",
+      eyebrow: "Sobre nosotros",
       title: "Somos una consultora especializada en IA creada para convertir complejidad técnica en impacto operativo.",
       body: [
         "En Vidra combinamos ciencia de datos, ingeniería de software y consultoría estratégica para entregar soluciones que generan retornos reales y medibles.",
@@ -579,8 +594,8 @@ export const whoWeArePageContent = {
     },
   },
   en: {
-    title: "Who we are | Vidra",
-    description: "Meet Vidra's approach, team, and principles for practical AI consulting.",
+    title: "About Vidra | Experts in Applied AI Implementation",
+    description: "Meet our multidisciplinary team. We combine data science and software engineering to deliver scalable, transparent AI solutions for business.",
     hero: {
       eyebrow: "Who we are",
       title: "We are a specialized AI consulting firm built to translate technical complexity into operational impact.",
@@ -723,8 +738,8 @@ export const whoWeArePageContent = {
 
 export const contactPageContent = {
   es: {
-    title: "Contacto | Vidra",
-    description: "Contacta con Vidra para hablar sobre una iniciativa de IA, datos o automatización.",
+    title: "Contacto | Hablemos de tu Proyecto de IA | Vidra",
+    description: "¿Tienes un reto con tus datos? Contacta con Vidra para definir el alcance y las prioridades de tu próxima iniciativa de inteligencia artificial.",
     hero: {
       eyebrow: "Contacto",
       title: "Empieza hoy tu próximo proyecto de IA.",
@@ -747,8 +762,8 @@ export const contactPageContent = {
     },
   },
   en: {
-    title: "Contact | Vidra",
-    description: "Contact Vidra to discuss an AI, data, or automation initiative.",
+    title: "Contact | Discuss Your Next AI Project | Vidra",
+    description: "Evaluating an AI initiative? Get in touch with Vidra to define the scope and practical path forward for your data strategy.",
     hero: {
       eyebrow: "Contact",
       title: "Start your next AI project today.",
@@ -941,6 +956,23 @@ export const legalPageContent = {
   },
 } as const;
 
+export const footerContent = {
+  es: {
+    tagline: "Transformamos datos en decisiones inteligentes.",
+    social: {
+      linkedinLabel: "LinkedIn",
+      xLabel: "X (Twitter)",
+    },
+  },
+  en: {
+    tagline: "We turn data into intelligent decisions.",
+    social: {
+      linkedinLabel: "LinkedIn",
+      xLabel: "X (Twitter)",
+    },
+  },
+} as const;
+
 export const footerCopy = {
   es: {
     yearLabel: "© {year} Vidra. Todos los derechos reservados.",
@@ -970,5 +1002,28 @@ export const searchPageContent = {
     emptyTitle: "No results found",
     emptyText: "We couldn’t find any results for",
     homeLabel: "Back to home",
+  },
+} as const;
+
+export const blogPageContent = {
+  es: {
+    title: "Blog sobre IA y Estrategia de Datos | Vidra",
+    description: "Análisis, guías y casos de estudio sobre la implementación de Inteligencia Artificial en el entorno empresarial.",
+    eyebrow: "Nuestro Blog",
+    categories: {
+      analytics: "Analytics",
+      ml: "Machine Learning",
+      dl: "Deep Learning",
+    },
+  },
+  en: {
+    title: "AI & Data Strategy Blog | Vidra",
+    description: "Insights, guides, and case studies on implementing Artificial Intelligence for business impact.",
+    eyebrow: "Our Blog",
+    categories: {
+      analytics: "Analytics",
+      ml: "Machine Learning",
+      dl: "Deep Learning",
+    },
   },
 } as const;

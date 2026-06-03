@@ -1,0 +1,40 @@
+---
+import Layout from '../../layouts/Layout.astro';
+import { getCollection } from 'astro:content';
+import { blogPageContent } from '../../lib/siteContent';
+import BlogCard from '../../components/BlogCard.astro';
+
+const locale = 'es';
+const t = blogPageContent[locale];
+const allPosts = await getCollection('blog', ({ data }) => {
+  return data.lang === locale;
+});
+
+// Ordenar por fecha descendente
+const sortedPosts = allPosts.sort((a, b) => b.data.pubDate.valueOf() - a.data.pubDate.valueOf());
+---
+
+<Layout title={t.title} description={t.description}>
+  <section class="relative pt-32 pb-20 bg-mist min-h-screen">
+    <div class="mx-auto max-w-7xl px-4 md:px-6">
+      <header class="mb-16">
+        <span class="mb-4 block text-xs font-bold uppercase tracking-[0.2em] text-blue">
+          {t.eyebrow}
+        </span>
+        <h1 class="text-4xl md:text-5xl font-bold text-ink max-w-3xl">
+          {t.title}
+        </h1>
+      </header>
+
+      {sortedPosts.length > 0 ? (
+        <div class="grid gap-8 md:grid-cols-2 lg:grid-cols-3">
+          {sortedPosts.map(post => <BlogCard post={post} locale={locale} />)}
+        </div>
+      ) : (
+        <div class="py-20 text-center border-2 border-dashed border-black/10 rounded-3xl">
+          <p class="text-black/50 font-medium">No hay artículos publicados todavía.</p>
+        </div>
+      )}
+    </div>
+  </section>
+</Layout>

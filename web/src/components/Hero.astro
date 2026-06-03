@@ -66,11 +66,16 @@ const initialSlide = slides[0];
             <span id="service-label" class="transition-opacity duration-500">{initialSlide.label}</span>
 
             <div class="flex items-center gap-2">
-              <button id="service-prev" type="button" aria-label={hero.prevLabel} class="grid h-9 w-9 place-items-center rounded-full border border-white/16 bg-white/8 text-white transition hover:bg-white/14">
-                <span aria-hidden="true">←</span>
+              <button id="service-prev" type="button" aria-label={hero.prevLabel} class="group flex h-11 w-11 items-center justify-center rounded-full border border-white/20 bg-white/10 text-white/90 backdrop-blur-sm transition hover:border-white/35 hover:bg-white/15 hover:text-white">
+                <svg class="h-5 w-5 transition-transform group-hover:-translate-x-0.5" viewBox="0 0 24 24" fill="none" aria-hidden="true">
+                  <path d="M14.5 6.5L9 12l5.5 5.5" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" />
+                </svg>
               </button>
-              <button id="service-next" type="button" aria-label={hero.nextLabel} class="grid h-9 w-9 place-items-center rounded-full border border-white/16 bg-white/8 text-white transition hover:bg-white/14">
-                <span aria-hidden="true">→</span>
+
+              <button id="service-next" type="button" aria-label={hero.nextLabel} class="group flex h-11 w-11 items-center justify-center rounded-full border border-white/20 bg-white/10 text-white/90 backdrop-blur-sm transition hover:border-white/35 hover:bg-white/15 hover:text-white">
+                <svg class="h-5 w-5 transition-transform group-hover:translate-x-0.5" viewBox="0 0 24 24" fill="none" aria-hidden="true">
+                  <path d="M9.5 6.5L15 12l-5.5 5.5" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" />
+                </svg>
               </button>
             </div>
           </div>

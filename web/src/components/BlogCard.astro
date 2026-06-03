@@ -1,0 +1,44 @@
+---
+import { Image } from 'astro:assets';
+const { post, locale } = Astro.props;
+const { title, description, pubDate, category, image } = post.data;
+const baseHref = locale === 'en' ? '/en/blog/' : '/blog/';
+---
+
+<article class="group flex flex-col overflow-hidden rounded-2xl border border-black/5 bg-white transition-all hover:shadow-xl hover:shadow-blue/5">
+  <a href={`${baseHref}${post.id}`} class="aspect-video overflow-hidden">
+    <Image 
+      src={image || "/images/blog-placeholder.jpg"} 
+      alt={title} 
+      loading="eager"
+      width={800}
+      height={450}
+      class="h-full w-full object-cover transition-transform duration-500 group-hover:scale-105"
+    />
+  </a>
+  
+  <div class="flex flex-1 flex-col p-6">
+    <div class="mb-3 flex items-center gap-3">
+      <span class="rounded-full bg-blue/5 px-3 py-1 text-[10px] font-bold uppercase tracking-wider text-blue">
+        {category}
+      </span>
+      <time class="text-[11px] text-black/40 font-medium uppercase tracking-tight">
+        {new Intl.DateTimeFormat(locale === 'es' ? 'es-ES' : 'en-US', { dateStyle: 'medium' }).format(pubDate)}
+      </time>
+    </div>
+    
+    <h3 class="mb-3 text-xl font-bold leading-snug text-ink group-hover:text-blue">
+      <a href={`${baseHref}${post.id}`}>{title}</a>
+    </h3>
+    
+    <p class="mb-6 line-clamp-3 text-sm leading-relaxed text-black/60">
+      {description}
+    </p>
+    
+    <div class="mt-auto pt-4 border-t border-black/5">
+      <a href={`${baseHref}${post.id}`} class="text-xs font-bold uppercase tracking-widest text-ink hover:text-blue transition-colors flex items-center gap-2">
+        Leer más <span class="text-lg">→</span>
+      </a>
+    </div>
+  </div>
+</article>
