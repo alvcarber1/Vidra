@@ -1,5 +1,6 @@
 ---
 import { localeLinks } from '../lib/siteContent';
+import {getCollection} from "astro:content";
 import { Image } from 'astro:assets';
 import logoLight from '../assets/Logo_vidra_sinfondo_letrablanca.png';
 import logoDark from '../assets/Logo_vidra_sinfondo_letranegra.png';
@@ -9,10 +10,61 @@ const links = localeLinks[locale as keyof typeof localeLinks]?.nav ?? localeLink
 const switchLabel = localeLinks[locale as keyof typeof localeLinks]?.switchLabel ?? 'EN';
 const homeHref = locale === 'en' ? '/en' : '/';
 const pathname = Astro.url.pathname;
-const switchHref =
+
+let switchHref =
   locale === 'en'
     ? pathname.replace(/^\/en/, '') || '/'
     : `/en${pathname === '/' ? '' : pathname}`;
+
+const blogPosts = await getCollection('blog');
+
+const spanishBlogMatch = pathname.match(/^\/blog\/([^/]+)\/?$/);
+const englishBlogMatch = pathname.match(/^\/en\/blog\/([^/]+)\/?$/);
+
+if (spanishBlogMatch) {
+  const currentSlug = spanishBlogMatch[1];
+
+  const currentPost = blogPosts.find(
+    (post) =>
+      post.data.lang === 'es' &&
+      post.id.replace(/\.md$/, '') === currentSlug
+  );
+
+  const translatedPost = currentPost
+    ? blogPosts.find(
+        (post) =>
+          post.data.lang === 'en' &&
+          post.data.translationKey === currentPost.data.translationKey
+      )
+    : null;
+
+  switchHref = translatedPost
+    ? `/en/blog/${translatedPost.id.replace(/\.md$/, '')}/`
+    : '/en/blog/';
+}
+
+if (englishBlogMatch) {
+  const currentSlug = englishBlogMatch[1];
+
+  const currentPost = blogPosts.find(
+    (post) =>
+      post.data.lang === 'en' &&
+      post.id.replace(/\.md$/, '') === currentSlug
+  );
+
+  const translatedPost = currentPost
+    ? blogPosts.find(
+        (post) =>
+          post.data.lang === 'es' &&
+          post.data.translationKey === currentPost.data.translationKey
+      )
+    : null;
+
+  switchHref = translatedPost
+    ? `/blog/${translatedPost.id.replace(/\.md$/, '')}/`
+    : '/blog/';
+}
+
 const languageLabel = locale === 'en' ? 'Language' : 'Idioma';
 ---
 

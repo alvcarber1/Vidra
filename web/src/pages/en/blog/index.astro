@@ -1,10 +1,10 @@
 ---
-import Layout from '../../layouts/Layout.astro';
+import Layout from '../../../layouts/Layout.astro';
 import { getCollection } from 'astro:content';
-import { blogPageContent, type Locale } from '../../lib/siteContent';
-import BlogCard from '../../components/BlogCard.astro';
+import { blogPageContent, type Locale } from '../../../lib/siteContent';
+import BlogCard from '../../../components/BlogCard.astro';
 
-const locale: Locale = Astro.url.pathname.startsWith('/en') ? 'en' : 'es';
+const locale: Locale = 'en';
 const t = blogPageContent[locale];
 
 const allPosts = await getCollection('blog', ({ data }) => {

@@ -12,6 +12,7 @@ const blog = defineCollection({
     pubDate: z.coerce.date(),
     lang: z.enum(['es', 'en']),
     category: z.enum(['analytics', 'machine-learning', 'deep-learning']),
+    translationKey: z.string(),
     image: z.string().optional(),
   }),
 });

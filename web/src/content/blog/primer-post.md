@@ -4,6 +4,7 @@ description: "Descripción del artículo."
 pubDate: "2026-06-03"
 lang: "es"
 category: "analytics"
+translationKey: "first-post"
 image: "/images/blog/mi-primer-post.jpg"
 ---
 

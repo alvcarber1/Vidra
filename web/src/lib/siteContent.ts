@@ -16,6 +16,7 @@ export const localeLinks = {
       { label: "Procesos", href: "/#process" },
       { label: "Quiénes somos", href: "/#who-we-are" },
       { label: "Contacto", href: "/contact" },
+      { label: "Blog", href: "/blog" },
     ],
   },
   en: {
@@ -26,12 +27,14 @@ export const localeLinks = {
       { label: "Process", href: "/en/#process" },
       { label: "Who we are", href: "/en/#who-we-are" },
       { label: "Contact", href: "/en/#contact" },
+      { label: "Blog", href: "/en/blog" },
     ],
     footer: [
       { label: "What we do", href: "/en/#what-we-do" },
       { label: "Process", href: "/en/#process" },
       { label: "Who we are", href: "/en/#who-we-are" },
       { label: "Contact", href: "/en/#contact" },
+      { label: "Blog", href: "/en/blog" },
     ],
   },
 } as const;
@@ -457,10 +460,10 @@ export const whoWeArePageContent = {
     description: "Conoce a nuestro equipo multidisciplinario. Combinamos ciencia de datos e ingeniería de software para entregar soluciones de IA escalables y transparentes.",
     hero: {
       eyebrow: "Sobre nosotros",
-      title: "Somos una consultora especializada en IA creada para convertir complejidad técnica en impacto operativo.",
+      title: "IA aplicada para convertir datos en impacto operativo.",
       body: [
-        "En Vidra combinamos ciencia de datos, ingeniería de software y consultoría estratégica para entregar soluciones que generan retornos reales y medibles.",
-        "Trabajamos con organizaciones que quieren construir sistemas de inteligencia artificial robustos, escalables y comprensibles, sin caer en la exageración tecnológica.",
+        "En Vidra combinamos ciencia de datos, ingeniería de software y consultoría estratégica para crear soluciones útiles, medibles y fáciles de adoptar.",
+        "Trabajamos con empresas que quieren aplicar inteligencia artificial con rigor, claridad y foco en resultados reales.",
       ],
       imageKey: "analysis",
       imageAlt: "Equipo analizando datos en un entorno de trabajo moderno",
@@ -468,11 +471,11 @@ export const whoWeArePageContent = {
     stats: {
           focus: {
             number: "100%",
-            label: "Foco en soluciones aplicables desde el primer día",
+            label: "Enfoque en soluciones aplicables y de impacto inmediato",
         },
         approach: {
             number: "0",
-            label: "Dependencia de proveedores o tecnologías cerradas",
+            label: "Independencia tecnológica total",
         },
         expertise: {
             number: "3",
@@ -480,7 +483,7 @@ export const whoWeArePageContent = {
         },
         independence: {
             number: "100%",
-            label: "Enfoque de asesoría independiente",
+            label: "Asesoría 100% independiente y objetiva",
         },
     },
     difference: {
@@ -518,8 +521,8 @@ export const whoWeArePageContent = {
     },
     people: {
       eyebrow: "Nuestro equipo",
-      title: "Personas curiosas, rigurosas y orientadas a entregar sistemas que se puedan usar.",
-      text: "Valoramos la originalidad, la diversidad de pensamiento y una cultura colaborativa para compartir conocimiento. Así conseguimos que cada persona aporte su parte en soluciones de alto rendimiento.",
+      title: "Expertos en datos, IA y estrategia aplicada.",
+      text: "Combinamos perfiles técnicos y estratégicos para diseñar soluciones de IA que puedan integrarse en la operativa real del negocio.",
       cta: "Explorar carreras",
       cards: [
         { title: "Careers", text: "Únete a un equipo que trabaja en IA aplicada a problemas reales.", href: "/#contact" },
@@ -531,7 +534,7 @@ export const whoWeArePageContent = {
         mindset: {
         strategy: {
             title: "Estrategia de negocio",
-            text: "Alineamos las iniciativas de transformación con resultados de negocio medibles.",
+            text: "Alineamos iniciativas de transformación con resultados de negocio medibles.",
         },
         technology: {
             title: "Liderazgo tecnológico",
@@ -548,24 +551,24 @@ export const whoWeArePageContent = {
         },
     },
     addValue: {
-        title: "Dónde aportamos valor",
-        description: "Experiencia que conecta estrategia, tecnología y ejecución.",
+        title: "Nuestro valor diferencial",
+        description: "Estrategia, tecnología y ejecución para generar resultados tangibles.",
         digitaltransformation: {
           title: "Transformación digital",
-          text: "Ayudamos a las organizaciones a convertir sus ambiciones en planes de transformación prácticos.",
+          text: "Transformamos ambiciones digitales en planes de acción concretos y resultados medibles.",
         },
         aiImplementation: {
           title: "IA y automatización",
-          text: "Identificamos dónde la automatización inteligente puede generar valor empresarial cuantificable",
+          text: "Identificamos y capitalizamos oportunidades donde la IA genera valor empresarial cuantificable.",
         },
         dataStrategy: {
           title: "Diseño de modelos operativos",
-          text: "Alineamos equipos, procesos y tecnología en torno a métodos de trabajo escalables.",
+          text: "Diseñamos modelos operativos que alinean equipos, procesos y tecnología para una escalabilidad óptima.",
         },
     },
     journey: {
         eyebrow: "Nuestro proceso",
-        title: "Diseñado para convertir la complejidad técnica en avance operativo.",
+        title: "De la complejidad técnica a la ejecución real.",
         steps: {
             understand: {
             number: "01",
@@ -609,11 +612,11 @@ export const whoWeArePageContent = {
     stats: {
         focus: {
             number: "100%",
-            label: "Focused on solutions that can be applied from day one",
+            label: "100% Focus on actionable solutions with immediate impact",
         },
         approach: {
             number: "0",
-            label: "Dependence on vendors or closed technologies",
+            label: "Complete technological independence",
         },
         expertise: {
             number: "3",
@@ -621,7 +624,7 @@ export const whoWeArePageContent = {
         },
         independence: {
             number: "100%",
-            label: "Independent advisory approach",
+            label: "100% independent and objective advisory",
         },
     },
     difference: {
@@ -659,8 +662,8 @@ export const whoWeArePageContent = {
     },
     people: {
       eyebrow: "Our people",
-      title: "Curious, rigorous people focused on building systems others can actually use.",
-      text: "We value originality, diversity, and confidence in our team, backed by a collaborative culture for sharing knowledge and supporting one another.",
+      title: "A team of rigorous experts, focused on delivering operational and high-impact AI solutions.",
+      text: "Our team combines diverse expertise and a collaborative culture, focused on maximizing the performance and applicability of every AI solution for our clients.",
       cta: "Explore careers",
       cards: [
         { title: "Careers", text: "Join a team working on AI applied to real operational problems.", href: "/en/#contact" },
@@ -689,19 +692,19 @@ export const whoWeArePageContent = {
         },
     },
     addValue: {
-        title: "Where we add value",
-        description: "Experience that connects strategy, technology, and execution.",
+        title: "Our Differentiating Value",
+        description: "Proven experience integrating strategy, technology, and execution for tangible results.",
         digitaltransformation: {
           title: "Digital transformation",
-          text: "We help organisations translate ambition into practical transformation roadmaps.",
+          text: "We translate digital ambitions into concrete action plans and measurable outcomes.",
         },
         aiImplementation: {
           title: "AI & Automation",
-          text: "We identify where intelligent automation can create measurable business value.",
+          text: "We identify and capitalize on opportunities where AI generates quantifiable business value.",
         },
         dataStrategy: {
           title: "Operating Model Design",
-          text: "We align teams, processes and technology around scalable ways of working.",
+          text: "We design operating models that align teams, processes, and technology for optimal scalability.",
         },
     },
     journey: {
@@ -1010,20 +1013,26 @@ export const blogPageContent = {
     title: "Blog sobre IA y Estrategia de Datos | Vidra",
     description: "Análisis, guías y casos de estudio sobre la implementación de Inteligencia Artificial en el entorno empresarial.",
     eyebrow: "Nuestro Blog",
+    empty: "No hay artículos publicados todavía.",
+    readMore: "Leer artículo",
+    backToBlog: "Volver al blog",
     categories: {
       analytics: "Analytics",
-      ml: "Machine Learning",
-      dl: "Deep Learning",
+      "machine-learning": "Machine Learning",
+      "deep-learning": "Deep Learning",
     },
   },
   en: {
     title: "AI & Data Strategy Blog | Vidra",
     description: "Insights, guides, and case studies on implementing Artificial Intelligence for business impact.",
     eyebrow: "Our Blog",
+    empty: "No articles published yet.",
+    readMore: "Read article",
+    backToBlog: "Back to blog",
     categories: {
       analytics: "Analytics",
-      ml: "Machine Learning",
-      dl: "Deep Learning",
+      "machine-learning": "Machine Learning",
+      "deep-learning": "Deep Learning",
     },
   },
 } as const;

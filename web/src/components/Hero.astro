@@ -52,7 +52,8 @@ const initialSlide = slides[0];
     <div class="grid min-h-[calc(100vh-10rem)] gap-8 lg:grid-cols-[1.08fr_0.92fr] lg:items-stretch">
       <div class="flex flex-col justify-between py-6 md:py-10 lg:py-12">
         <div>
-          <p id="service-description" class="mb-8 max-w-sm text-lg leading-7 text-white/72 transition-opacity duration-300">
+          <!-- FIX: opacidad /75 — era /72, pasa AA en fondo oscuro -->
+          <p id="service-description" class="mb-8 max-w-sm text-lg leading-7 text-white/75 transition-opacity duration-300">
             {initialSlide.description}
           </p>
 
@@ -62,17 +63,29 @@ const initialSlide = slides[0];
         </div>
 
         <div class="mt-12 max-w-xl">
-          <div class="flex items-center justify-between gap-4 text-xs font-medium uppercase tracking-[0.22em] text-white/55">
+          <!-- FIX: tracking 0.25em + opacidad /55 (tertiary) — era 0.22em / /55 ya correcto -->
+          <div class="flex items-center justify-between gap-4 text-[0.75rem] font-semibold uppercase tracking-[0.25em] text-white/55">
             <span id="service-label" class="transition-opacity duration-500">{initialSlide.label}</span>
 
             <div class="flex items-center gap-2">
-              <button id="service-prev" type="button" aria-label={hero.prevLabel} class="group flex h-11 w-11 items-center justify-center rounded-full border border-white/20 bg-white/10 text-white/90 backdrop-blur-sm transition hover:border-white/35 hover:bg-white/15 hover:text-white">
+              <!-- FIX: h-11 w-11 mantenido — cumple touch target 44px -->
+              <button
+                id="service-prev"
+                type="button"
+                aria-label={hero.prevLabel}
+                class="group flex h-11 w-11 items-center justify-center rounded-full border border-white/20 bg-white/10 text-white/75 backdrop-blur-sm transition hover:border-white/35 hover:bg-white/15 hover:text-white"
+              >
                 <svg class="h-5 w-5 transition-transform group-hover:-translate-x-0.5" viewBox="0 0 24 24" fill="none" aria-hidden="true">
                   <path d="M14.5 6.5L9 12l5.5 5.5" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" />
                 </svg>
               </button>
 
-              <button id="service-next" type="button" aria-label={hero.nextLabel} class="group flex h-11 w-11 items-center justify-center rounded-full border border-white/20 bg-white/10 text-white/90 backdrop-blur-sm transition hover:border-white/35 hover:bg-white/15 hover:text-white">
+              <button
+                id="service-next"
+                type="button"
+                aria-label={hero.nextLabel}
+                class="group flex h-11 w-11 items-center justify-center rounded-full border border-white/20 bg-white/10 text-white/75 backdrop-blur-sm transition hover:border-white/35 hover:bg-white/15 hover:text-white"
+              >
                 <svg class="h-5 w-5 transition-transform group-hover:translate-x-0.5" viewBox="0 0 24 24" fill="none" aria-hidden="true">
                   <path d="M9.5 6.5L15 12l-5.5 5.5" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" />
                 </svg>
@@ -86,21 +99,26 @@ const initialSlide = slides[0];
         </div>
       </div>
 
-      <div class="relative min-h-[560px] overflow-hidden rounded-[1rem]">
+      <!-- FIX: rounded-[1.5rem] (era 1rem) — consistente con el token "feature" del sistema -->
+      <div class="relative min-h-[560px] overflow-hidden rounded-[1.5rem]">
         <Image
-            id="service-image"
-            src={initialSlide.imageAsset}
-            alt={initialSlide.alt}
-            width={900}
-            height={900}
-            format="webp"
-            quality={75}
-            class="absolute inset-0 h-full w-full object-cover transition-opacity duration-300"
-            loading="eager"
-            decoding="async"
+          id="service-image"
+          src={initialSlide.imageAsset}
+          alt={initialSlide.alt}
+          width={900}
+          height={900}
+          format="webp"
+          quality={75}
+          class="absolute inset-0 h-full w-full object-cover transition-opacity duration-300"
+          loading="eager"
+          decoding="async"
         />
-        <div class="absolute inset-0 bg-gradient-to-t from-[#071729]/72 via-[#071729]/10 to-transparent"></div>
-        <a href={servicesHref} class="absolute bottom-6 left-6 inline-flex items-center gap-3 rounded-full bg-white px-5 py-3 text-sm font-medium text-[#071729] transition hover:bg-[#dcecff]">
+        <div class="absolute inset-0 bg-gradient-to-t from-[#071729]/75 via-[#071729]/10 to-transparent"></div>
+        <!-- FIX: py-3.5 para touch target cómodo -->
+        <a
+          href={servicesHref}
+          class="absolute bottom-6 left-6 inline-flex items-center gap-3 rounded-full bg-white px-5 py-3.5 text-sm font-medium text-[#071729] transition hover:bg-[#dcecff]"
+        >
           {hero.cta}
           <span aria-hidden="true">→</span>
         </a>
@@ -192,15 +210,15 @@ const initialSlide = slides[0];
     }
 
     const start = () => {
-        prevButton?.addEventListener("click", goPrevious);
-        nextButton?.addEventListener("click", goNext);
+      prevButton?.addEventListener("click", goPrevious);
+      nextButton?.addEventListener("click", goNext);
 
-        slides.forEach((slide) => {
-            const img = new window.Image();
-            img.src = slide.imageSrc;
-        });
+      slides.forEach((slide) => {
+        const img = new window.Image();
+        img.src = slide.imageSrc;
+      });
 
-        startCycle(idx);
+      startCycle(idx);
     };
 
     if (document.readyState === "loading") {
